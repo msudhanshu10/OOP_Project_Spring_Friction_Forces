@@ -5,7 +5,7 @@ Project: 2. Spring Friction and Forces
 Group No: 26
 Name: 	Sudhanshu Mishra, 2019B1A70750P
 	      Satyam Srivastava, 2019B1A70188P	
-*/
+*
 ------------------------------------<<Execution Document>>---------------------------------------------------------
 To run the Application, run the jar executable file "2_2019B1A70750P_2019B1A70188P_ExecutableFile" in the command prompt using the command-
 	"java -jar 2_2019B1A70750P_2019B1A70188P_ExecutableFile.jar"
