@@ -1,0 +1,65 @@
+/*
+Project: 2. Spring Friction and Forces
+Group No: 26
+Name: 	Sudhanshu Mishra, 2019B1A70750P
+	Satyam Srivastava, 2019B1A70188P	
+*/
+----------------------------------------------<<Class Details>>--------------------------------------------------
+1. Shape: This is an abstract class containing all the variables that are common to its child classes. It has a readInput() method, getter and setter methods. It is declared as abstract so to include any common feature needs to be added and implmented differently can be done easily.
+2. Box: It inherits Shape class. It contains Box specific data members; height,width.
+3. Ball: It inherits Shape class and implements RollableShapes interface. It contains Ball specific data members; radius.
+4. Ring: It inherits Shape class and implements RollableShapes interface. It contains Ring specific data members; radius.
+5. Cylinder: It inherits Shape class and implements RollableShapes interface. It contains Cylinder specific data members; radius and height.
+
+6. SimulateShapes: It is an interface. Classes implementing this interface will implement a simulate method. It is declared as an interface so as to implement code to interface, not implemntation principle.
+7. Simulator: This class assigns the type of simulation to SimulateShapes  object and returns the object of SimulateShapes.
+8. SimulateBoxOnGround: This class implements SimulateShape and does simulation of Box on Ground case.
+9. SimulateBoxOnBox: This class implements SimulateShape and does simulation of Box on Box case.
+10. SimulateBallOnGround: This class implements SimulateShape and does simulations of Ball on ground case.
+11. SimulateBallOnBox: This class implements SimulateShape and does simulation of Ball on box case.
+12. SimulateRingOnGround: This class implements SimulateShape and does simulationof ring on ground.
+13. SimulateRingOnBox: This class implements SimulateShape and does simulation of ring on box.
+14. SimulateCylinderOnGround: This class implements SimulateShape and does simulation of Cylinder on ground.
+15. SimulateSpringWithBox: This class implements SimulateShape and does simulation of box attached with spring.
+
+16. RollableShapes: It is an interface implemented by shapes having rollable properties such as ring, ball and cylinder. It contains calcMOI() method. Classes implementing calcMOI() will have to calculate moment of inertia of that shape.
+
+17. WriteToCSV: This class writes the given data to a CSV file.
+
+18. ShapeCreator: This class instantiates shape object array to different shapes based on choice entered by the user.
+
+19. NRangeExcpetion: This exception class limits user to enter either 1 or 2.
+20. InputOrderException: This exception class handles all combinations of possible simulations which may produce error.
+21. CheckException: This class checks for all combinations of possible simulations which may produce error.
+
+22. Driver: This is the main class which prompts user to enter some global variable details.
+
+----------------------------------------------<<Analysis of Code>>--------------------------------------------------
+********************************************************************************************************************
+Limitations of the project#
+1- There have been many assumptions taken to limit the scope and complexity of the project from the physics point of view. The project has been designed to be of completely object oriented nature, whereas it lacks on the physics part.
+2- Limited number of shapes and there possible configurations for simulations have been taken into consideration.
+********************************************************************************************************************
+Future scope of the project#
+1- New shapes such as slope, cone, etc can be added as a class extending abstract Shape class. Similarly, new simulations such as box with spring can be added as a class implementing SimulateShapes interface.
+2- More complex cases such as sliding after rolling, external forces, projectile motion can be considered in simulation.
+3- More physical complexities can be added to make simulation close to real.
+4- The design of different classes and the association/composition between them can be improved more so as to reduce the modifications in the classes while doing extension of the application.
+********************************************************************************************************************
+The code follows the Object Oriented Principles taught in the lecture:
+1- Encapsulate what varies: Shape and its subclasses are encapsulated. Similarly, Different types of simulation class implementing SimulateShapes are encapsulated.
+2- Favour composition over inheritance: composition means to use the instance variables to achieve the reference between two or more classes. The instance of Simulator class is passed the object of Shape class and therefore, they both are in composition. Similary, SimulateShapes and Shape classes are in composition.   
+3- Program to interface, not implementations: Shape class is an abstract class. Similarly, ShapeSimulator is an interface. In the driver class, a single object of Shape and and SimluateShape is created which will be assigned to various references in the runtime. In this way, behaviour of program can be changed at run-time.
+4- Loose coupling: We have tried to reduce dependency between multiple objects that interact. This is loose coupling of objects. For ex: the driver class calls the assignShape() method of the Simulator class on the object of the type Shape. The only thing that the driver class knows about the Simulator class is that it has a certain method named as assignShape(). It does not need to know its internal working. We can create new Shapes at any time because the only thing that the creation of a shape depends on is the list of the shapes implemented by abstract class Shape.
+5- Close to modification and open to extension: The driver class is close to modification while the Shape class and SimulateShapes are open to extension. Whenever we want to add a shape and want to simulate it, then simply add a new shape extending shape class and add a new simulation implementing SimulateShapes.
+********************************************************************************************************************
+Design Patterns used#
+1) Singleton Pattern- Implemented in the class Ground. This design pattern is used when we need to have only one instance of our class. To make the code more proof, there can be only one object for the class Ground which holds the responsibility for initializing and updating the global variables, since they remain same for all the objects taking part in the simulation. 
+2) Strategy Pattern- The Shape class encapsulates one family of algorithms consisting of different shapes, while SimulateShapes encapsulates another family of algorithms. The strategy is SimulateShapes interface while concrete stratgies are the classes implementing this interface. 
+3) Simple Factory Pattern- The client Driver class goes through the factory ShapeCreator class, to get the instances of different shapes. The ShapeCreator class refers to the concrete Shape classes to create instances of different shapes. Different shapes such as box, ball and ring are concrete products and each of them extend the abstract class Shape.
+********************************************************************************************************************
+Exception Handling#
+The code handles two major types of user-defined exceptions:
+1- NRangeException: N can either take 1 or 2, since the scope of the project is limited.
+2- InputOrderException: If N is 1, then all simulations are valid for valid shapeID. If N is 2, then cases such as Ring on Ring, or Ring on Cylinder are invalid.
+*****************************************************************************************************************
